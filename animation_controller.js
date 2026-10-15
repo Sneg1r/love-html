@@ -18,7 +18,6 @@ class AnimationController {
         this.isExploding = false;
 
         this.setupEventListeners();
-        this.particleManager.initParticles();
         this.updateParticleTargets();
     }
 
