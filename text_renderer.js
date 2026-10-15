@@ -120,6 +120,9 @@ class TextRenderer {
 
         console.log('Точек в тексте:', points.length, '| Частиц сейчас:', this.particleManager?.particles?.length);
 
+        const d = document.getElementById('debug');
+        if (d) d.textContent += ' | Точек: ' + points.length;
+        
         return points;
     }
 
