@@ -15,6 +15,7 @@ class ParticleManager {
         this.particles = Array.from({ length: this.targetParticleCount }, () => 
             new Particle(Utils.random(0, width), Utils.random(0, height), this.configManager)
         );
+        document.getElementById('debug').textContent = 'Частиц: ' + this.particles.length;
     }
 
     setupResizeListener() {
