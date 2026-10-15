@@ -10,11 +10,7 @@ class ParticleManager {
     }
 
     initParticles() {
-        const width = this.canvasManager.getWidth();
-        const height = this.canvasManager.getHeight();
-        this.particles = Array.from({ length: this.targetParticleCount }, () => 
-            new Particle(Utils.random(0, width), Utils.random(0, height), this.configManager)
-        );
+        this.particles = [];
         document.getElementById('debug').textContent = 'Частиц: ' + this.particles.length;
     }
 
@@ -65,33 +61,29 @@ class ParticleManager {
     }
 
     updateParticleTargets(textPoints) {
-        const particleCount = Math.min(this.particles.length, textPoints.length);
-        const assignedTargets = new Set();
-    
-        for (let i = 0; i < particleCount; i++) {
-            let closestTargetIndex = -1;
-            let minDistance = Infinity;
-    
-            for (let j = 0; j < textPoints.length; j++) {
-                if (assignedTargets.has(j)) continue;
-    
-                const dx = this.particles[i].x - textPoints[j].x;
-                const dy = this.particles[i].y - textPoints[j].y;
-                const distance = dx * dx + dy * dy;
-    
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    closestTargetIndex = j;
-                }
-            }
-    
-            if (closestTargetIndex !== -1) {
-                this.particles[i].setTarget(textPoints[closestTargetIndex].x, textPoints[closestTargetIndex].y);
-                assignedTargets.add(closestTargetIndex);
-            }
-        }
-    
+    // Сколько точек — столько и частиц (но не больше MAX_PARTICLES)
+    const maxParticles = this.configManager.getConfig('MAX_PARTICLES');
+    const neededCount = Math.min(textPoints.length, maxParticles);
+
+    const width = this.canvasManager.getWidth();
+    const height = this.canvasManager.getHeight();
+
+    // Если частиц больше, чем нужно — обрезаем
+    if (this.particles.length > neededCount) {
+        this.particles.splice(neededCount);
     }
+    // Если меньше — добавляем новые
+    while (this.particles.length < neededCount) {
+        this.particles.push(
+            new Particle(Utils.random(0, width), Utils.random(0, height), this.configManager)
+        );
+    }
+
+    // Раздаём цели: каждая частица получает свою точку
+    for (let i = 0; i < this.particles.length; i++) {
+        this.particles[i].setTarget(textPoints[i].x, textPoints[i].y);
+    }
+}
 
     adjustParticleCount(textPoints) {
         const width = this.canvasManager.getWidth();
