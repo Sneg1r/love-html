@@ -106,7 +106,7 @@ class TextRenderer {
         const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
 const points = [];
         
-const isMobile = this.configManager.getConfig('IS_MOBILE');
+const isMobile = this.configManager.getConfig('IS_MOBILE') || window.innerWidth < 768;
 const samplingFactor = isMobile ? 3 : 1;
 
 for (let i = 0; i < imageData.data.length; i += samplingFactor * 4) {
