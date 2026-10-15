@@ -105,7 +105,9 @@ class TextRenderer {
 
         const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
 const points = [];
-const samplingFactor = 1;
+        
+const isMobile = this.configManager.getConfig('IS_MOBILE');
+const samplingFactor = isMobile ? 3 : 1;
 
 for (let i = 0; i < imageData.data.length; i += samplingFactor * 4) {
     if (imageData.data[i + 3] > 128) {
