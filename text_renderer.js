@@ -104,19 +104,19 @@ class TextRenderer {
         });
 
         const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
-        const points = [];
-        const samplingFactor = 1;
+const points = [];
+const samplingFactor = 1;
 
-        for (let i = 0; i < imageData.data.length; i += samplingFactor * 4) {
-            if (imageData.data[i + 3] > 128) {
-                const px = (i / 4) % tempCanvas.width;
-                const py = Math.floor((i / 4) / tempCanvas.width);
-                points.push({
-                    x: x + px - tempCanvas.width / 2,
-                    y: y + py - tempCanvas.height / 2
-                });
-            }
-        }
+for (let i = 0; i < imageData.data.length; i += samplingFactor * 4) {
+    if (imageData.data[i + 3] > 128) {
+        const px = (i / 4) % tempCanvas.width;
+        const py = Math.floor((i / 4) / tempCanvas.width);
+        points.push({
+            x: x + px - tempCanvas.width / 2,
+            y: y + py - tempCanvas.height / 2
+        });
+    }
+}
 
         console.log('Точек в тексте:', points.length, '| Частиц сейчас:', this.particleManager?.particles?.length);
 
