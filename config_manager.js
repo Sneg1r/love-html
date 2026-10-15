@@ -37,12 +37,13 @@ class ConfigManager {
     }
 
     adjustConfigForMobile() {
-        if (this.config.IS_MOBILE) {
-            this.config.MAX_PARTICLES = Math.min(this.config.MAX_PARTICLES, 22000);
-            this.config.PARTICLE.BASE_RADIUS.MIN = Math.max(this.config.PARTICLE.BASE_RADIUS.MIN, 2.5);
-            this.config.PARTICLE.BASE_RADIUS.MAX = Math.max(this.config.PARTICLE.BASE_RADIUS.MAX, 4);
-        }
+    // Больше не режем частицы — пусть код сам считает нужное количество
+    // Оставляем только настройку размера, если нужно
+    if (this.config.IS_MOBILE) {
+        this.config.PARTICLE.BASE_RADIUS.MIN = 0.8;
+        this.config.PARTICLE.BASE_RADIUS.MAX = 1.8;
     }
+}
 
     getConfig(key) {
         return key.split('.').reduce((obj, k) => obj && obj[k], this.config);
