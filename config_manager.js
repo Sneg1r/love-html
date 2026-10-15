@@ -8,7 +8,7 @@ class ConfigManager {
 
     getDefaultConfig() {
         return {
-            MAX_PARTICLES: 20000,
+            MAX_PARTICLES: 50000,
             PARTICLE_DENSITY: 1/7,
             TRANSITION_DURATION: 1000,
             MOUSE_EFFECT: { RADIUS: 15 },
