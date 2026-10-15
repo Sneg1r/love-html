@@ -123,7 +123,7 @@ for (let i = 0; i < imageData.data.length; i += samplingFactor * 4) {
         console.log('Точек в тексте:', points.length, '| Частиц сейчас:', this.particleManager?.particles?.length);
 
         const d = document.getElementById('debug');
-        if (d) d.textContent += ' | Точек: ' + points.length;
+        //if (d) d.textContent += ' | Точек: ' + points.length;
         
         return points;
     }
