@@ -39,7 +39,7 @@ class ConfigManager {
     adjustConfigForMobile() {
         if (this.config.IS_MOBILE) {
             this.config.MAX_PARTICLES = Math.min(this.config.MAX_PARTICLES, 22000);
-            this.config.PARTICLE.BASE_RADIUS.MIN = Math.max(this.config.PARTICLE.BASE_RADIUS.MIN, 2);
+            this.config.PARTICLE.BASE_RADIUS.MIN = Math.max(this.config.PARTICLE.BASE_RADIUS.MIN, 2.5);
             this.config.PARTICLE.BASE_RADIUS.MAX = Math.max(this.config.PARTICLE.BASE_RADIUS.MAX, 4);
         }
     }
